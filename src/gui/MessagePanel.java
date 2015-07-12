@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
@@ -9,6 +10,24 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
+
+class ServerInfo{
+	private String name;
+	private int id;
+	
+	public ServerInfo(String name, int id){
+		this.name = name;
+		this.id = id;
+	}
+	public int getID() {
+		return id;
+	}
+	
+	public String toString(){
+		return id + ": " + name;
+	}
+}
+
 
 public class MessagePanel extends JPanel {
 	
@@ -23,10 +42,15 @@ public class MessagePanel extends JPanel {
 			
 			@Override
 			public void valueChanged(TreeSelectionEvent e) {
-				DefaultMutableTreeNode node = (DefaultMutableTreeNode)serverTree.getLastSelectedPathComponent();
+				// TODO Auto-generated method stub
+				DefaultMutableTreeNode node = (DefaultMutableTreeNode) serverTree.getLastSelectedPathComponent();
 				
-				Object userObject = node.getUserObject();
+				Object userObject =  node.getUserObject();
 				
+				/*if(userObject instanceof ServerInfo){
+					int id = ((ServerInfo) userObject).getID();
+					System.out.println("Got user object with ID: " + id);
+				}*/
 				System.out.println(userObject);
 				
 			}
@@ -40,17 +64,17 @@ public class MessagePanel extends JPanel {
 		DefaultMutableTreeNode top = new DefaultMutableTreeNode("Servers");
 		
 		DefaultMutableTreeNode branch1 = new DefaultMutableTreeNode("USA");
-		DefaultMutableTreeNode server1 = new DefaultMutableTreeNode("New York");
-		DefaultMutableTreeNode server2 = new DefaultMutableTreeNode("Boston");
-		DefaultMutableTreeNode server3 = new DefaultMutableTreeNode("Los Angeles");
+		DefaultMutableTreeNode server1 = new DefaultMutableTreeNode(new ServerInfo("New York", 0));
+		DefaultMutableTreeNode server2 = new DefaultMutableTreeNode(new ServerInfo("Boston",1));
+		DefaultMutableTreeNode server3 = new DefaultMutableTreeNode(new ServerInfo("Los Angeles", 2));
 		
 		branch1.add(server1);
 		branch1.add(server2);
 		branch1.add(server3);
 		
 		DefaultMutableTreeNode branch2 = new DefaultMutableTreeNode("UK");
-		DefaultMutableTreeNode server4 = new DefaultMutableTreeNode("London");
-		DefaultMutableTreeNode server5 = new DefaultMutableTreeNode("Edinburgh");
+		DefaultMutableTreeNode server4 = new DefaultMutableTreeNode(new ServerInfo("London", 3));
+		DefaultMutableTreeNode server5 = new DefaultMutableTreeNode(new ServerInfo("Edinburgh", 4));
 		
 		branch2.add(server4);
 		branch2.add(server5);
