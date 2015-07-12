@@ -2,13 +2,13 @@ package gui;
 
 import java.awt.BorderLayout;
 
-
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeSelectionModel;
 
 class ServerInfo{
@@ -32,9 +32,17 @@ class ServerInfo{
 public class MessagePanel extends JPanel {
 	
 	private JTree serverTree;
+	private DefaultTreeCellRenderer treeCellRenderer;
 	public MessagePanel(){
 		
+		treeCellRenderer = new DefaultTreeCellRenderer();
+		
+		treeCellRenderer.setLeafIcon(Utils.createIcon("/Images/Server16.gif"));
+		treeCellRenderer.setOpenIcon(Utils.createIcon("/Images/WebComponent16.gif"));
+		treeCellRenderer.setClosedIcon(Utils.createIcon("/Images/WebComponentAdd16.gif"));
+		
 		serverTree = new JTree(createTree());
+		serverTree.setCellRenderer(treeCellRenderer);
 		
 		serverTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		
